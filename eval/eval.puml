@@ -1,0 +1,93 @@
+@startuml
+
+class Interlocuteur {
+  - civilite: string
+  - name: string
+  - email: string
+  - tel: string
+  - mobile_phone: string
+}
+
+class Client {
+  - civilite: string
+  - name: string
+  - email_address: string
+  - tel: string
+  - mobile_phone: string
+
+  + addIntelocuteur()
+  + removeInterlocuteur()
+}
+
+class Itc {
+  - firstName: string
+  - lastName: string
+  - devis: array
+
+  + addDevis()
+  + removeDevis()
+  + addIntelocuteur()
+  + removeInterlocuteur()
+}
+
+class RespItc {
+  - name: string
+  - email: string
+  - itcs: array
+  - devis: array
+}
+
+class Devis {
+  - offer: string
+  - affaire: Affaire
+  - title: string
+  - date: Date
+  - status: string
+  - devisNumber: int
+  - affairenumber: int
+  # Client
+  # Product
+  # Prestations
+  # Itc
+
+  + addProduct()
+  + deleteProduct()
+  + addPresta()
+  + deletePresta()
+  + updateDevis()
+  + setItc()
+  + setClient()
+}
+
+class Prestation {
+  - refCatalogue
+  - name: string
+  - code: string
+  - prestataire: string
+  - prix: float
+}
+
+class Product {
+  - refCatalogue
+  - name: string
+  - code: string
+  - fournisseur: string
+  - refFournisseur: string
+  - prix: float
+}
+
+class Affaire {
+  - id: int
+  - devis: array
+}
+
+RespItc "1" -- "0..*" Itc : manage
+Itc "1" -- "0..*" Devis : manage
+Devis "0..*" -- "0..*" Product : has
+Devis "0..*" -- "0..*" Prestation : has
+Devis "0..*" -- "0.1" Client : has
+Devis "0..*" -- "1" Affaire : has
+Client "1" -- "0..*" Interlocuteur : has
+
+@enduml
+
